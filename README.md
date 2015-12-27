@@ -1,3 +1,13 @@
+# Last file update
+
+The files contained in this folder have been modified by 
+Fernando in order to contain the second assignment of the
+'R programming' course.
+
+Last update: december 27, 2015
+
+Happy new year! :)
+
 ### Introduction
 
 This second programming assignment will require you to write an R

@@ -1,7 +1,7 @@
 
 #############################################################################
 # THIS FILE  ALLOWS YOU TO CALCULATE THE INVERSE OF A MATRIX IF IT HASN'T   #
-# BEEN DONE YET. ELSE, IT WILL MAKE THE CALCULATION.                        #
+# BEEN DONE YET. ELSE, IT WILL MAKE THE CALCULATION. HAPPY NEW YEAR! :)     #
 #############################################################################
 
 

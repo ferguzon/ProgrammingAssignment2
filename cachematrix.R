@@ -5,19 +5,19 @@
 #############################################################################
 
 
-# Generally speaking, there are two functions within this file ('cacheMatrix
-# and 'matrixSolve').
+# Generally speaking, there are two functions within this file ('makeCacheMatrix
+# and 'cacheSolve').
 
-# The first one, called "cacheMatrix" has four functions in it that help you
+# The first one, called "makeCacheMatrix" has four functions in it that help you
 # store and retrieve the value of the original matrix and the inverse matrix 
 # and it need one argument, 'firstMatrix' which is the original matrix to be
 # solved. Each of its functions is described in the next lines. 
 
-# The second function, called "matrixSolve", is the one that does the heavy job. 
-# It asks "cacheMatrix" if the calculation has already been done and, if the
+# The second function, called "cacheSolve", is the one that does the heavy job. 
+# It asks "makeCacheMatrix" if the calculation has already been done and, if the
 # process hasn't been made, it calculates the inverse of the matrix
 
-cacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'cacheMatrix' function
+makeCacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'makeCacheMatrix' function
 
 #   'SolvedM' allows us to store information related to the inverse of a matrix. If the 
 #   calculation hasn't been made, then its value is 'NULL'. Else, it has the inverse
@@ -26,8 +26,8 @@ cacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'cacheMatrix' f
     solvedM <- NULL
     
 #   'setValues' function: when we first run the whole program, we have to assign the 
-#   cacheMatrix function to an R object through the console (for example, 
-#   "object1 <- cacheMatrix()"). Then, in console, with "object1$setValues(matrixName)" 
+#   makeCacheMatrix function to an R object through the console (for example, 
+#   "object1 <- makeCacheMatrix()"). Then, in console, with "object1$setValues(matrixName)" 
 #   we pass the matrix we want to solve. In this case, "matrixName" is an R object 
 #   previously created. After doing this, the function will assign parameter
 #   "firstMatrix" the value of the matrix you are passing through "matrixName". 
@@ -42,10 +42,10 @@ cacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'cacheMatrix' f
         
     }
     
-#   'storeMatrix': this is a function called by the 'matrixSolve' function. After 
-#   'matrixSolve' calculates the inverse of the matrix for the first time, 
+#   'storeMatrix': this is a function called by the 'cacheSolve' function. After 
+#   'cacheSolve' calculates the inverse of the matrix for the first time, 
 #   it calls 'storeMatrix' in order to save the result into 'solvedM' (recall
-#   that 'solvedM' is an object of the 'cacheMatrix' function). Therefore, for future 
+#   that 'solvedM' is an object of the 'makeCacheMatrix' function). Therefore, for future 
 #   requests to calculate the matrix inverse, 'solvedM' is going to have the
 #   value and, thus, there is going to be no need to calculate the inverse again.
     
@@ -56,7 +56,7 @@ cacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'cacheMatrix' f
     }
 
 #   'obtainCalculation': this function just returns the 'solvedM' object.
-#   'obtainCalculation' is called by the 'matrixSolve' function ('par1$obtain')
+#   'obtainCalculation' is called by the 'cacheSolve' function ('par1$obtain')
 #   to see if the matrix inverse has already been calculated. 
     
     obtainCalculation <- function() solvedM
@@ -68,25 +68,25 @@ cacheMatrix <- function(firstMatrix = matrix()) { # beginning of 'cacheMatrix' f
     
     list(Store = storeMatrix, Obtain = obtainCalculation, Original = originalMatrix, Set = setValues)
     
-} # end of 'cacheMatrix' function
+} # end of 'makeCacheMatrix' function
 
 
-# The next function, 'matrixSolve' asks "cacheMatrix" if the calculation has
+# The next function, 'cacheSolve' asks "makeCacheMatrix" if the calculation has
 # already been done and, if the process hasn't been made, it calculates the 
 # inverse of the matrix. It needs one argument or parameter ('par1'), that should
-# be the object we created by assigning 'cacheMatrix()' to it (in the first
-# example it was "object1 <- cacheMatrix()". This was explained when the function
-# 'setValues' of the 'cacheMatrix' function was explained.
+# be the object we created by assigning 'makeCacheMatrix()' to it (in the first
+# example it was "object1 <- makeCacheMatrix()". This was explained when the function
+# 'setValues' of the 'makeCacheMatrix' function was explained.
 
-matrixSolve <- function(par1, ...) {  # beginning of 'matrixSolve' function
+cacheSolve <- function(par1, ...) {  # beginning of 'cacheSolve' function
 
 #   With 'par1$Obtain()' we get the status of the 'solvedM' object, located in
-#   the 'cacheMatrix() function. 
+#   the 'makeCacheMatrix() function. 
 
         checkStatus <- par1$Obtain()
     
-#   If 'checkStatus" gets a not 'Null' value, then 'matrixSolve' will ask 
-#   'cacheMatrix' for the inverse value of the matrix with 'solvedMatrix <- par1$Obtain()' 
+#   If 'checkStatus" gets a not 'Null' value, then 'cacheSolve' will ask 
+#   'makeCacheMatrix' for the inverse value of the matrix with 'solvedMatrix <- par1$Obtain()' 
 #   (that is because if 'checkStatus' has a different value than 'Null' 
 #   it means the calculation has already been done).
         
@@ -99,7 +99,7 @@ matrixSolve <- function(par1, ...) {  # beginning of 'matrixSolve' function
     }
     
 #   If 'solvedM' is 'NULL' (thus 'checkStatus' has a 'Null' value) then 
-#   it 'matrixSolve' will do the computation for the first time.
+#   it 'cacheSolve' will do the computation for the first time.
     
 #   With the next line, we retrieve the original matrix that should be
 #   used to calculate its inverse
@@ -116,7 +116,7 @@ matrixSolve <- function(par1, ...) {  # beginning of 'matrixSolve' function
     
 #   As a summary, the next piece of code calculates the inverse of a matrix and 
 #   assigns it to 'original' object, with 'original <- solve(original)'. 
-#   Then it stores the result in the 'cacheMatrix' function with 'par1$Store(original)' 
+#   Then it stores the result in the 'makeCacheMatrix' function with 'par1$Store(original)' 
 #   and finally returns 'original' to show it to the user. If an
 #   error occurs the function will print a message asking the user to check the matrix that
 #   is trying to solve.
@@ -134,4 +134,4 @@ matrixSolve <- function(par1, ...) {  # beginning of 'matrixSolve' function
             }
     )
     
-} # end of 'matrixSolve' function
+} # end of 'cacheSolve' function
